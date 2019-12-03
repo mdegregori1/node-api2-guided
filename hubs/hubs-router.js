@@ -92,6 +92,19 @@ router.put('/:id', (req, res) => {
 }); 
 
 // add an endpoint that returns all the messages for a hub
+// GEt /api/hubs/:id/messages 
+router.get('/:id/messages', (req, res) => {
+    const id = req.params.id;
+    Hubs.findHubMessages(id)
+    .then(messages => {
+        res.status(200).json(messages);
+    })
+    .catch(error => {
+        console.log(error)
+        res.status(500).json({errorMessage: "error getting hubs messages"})
+    })
+})
+
 // add an endpoint for adding new message to a hub
 
 // export default server;
